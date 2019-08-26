@@ -1,0 +1,24 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Radoslav Sapundzhiev
+ * Date: 7/31/2019
+ * Time: 7:18 AM
+ */
+
+namespace AppBundle\Service\Encryption;
+
+
+class BCryptService implements EncryptionServiceInterface
+{
+
+    public function hash(string $password)
+    {
+        return password_hash($password, PASSWORD_BCRYPT);
+    }
+
+    public function verify(string $password, string $hash)
+    {
+        return password_verify($password, $hash);
+    }
+}
