@@ -4,7 +4,7 @@
     <div id="login">
         <form name="authenticate" action="{{ path('security_login') }}" method="post">
             <div class="container">
-                <h1>Login</h1>
+                <h2>Login</h2>
                 <p>Please enter your credentials.</p>
                 <hr>
 
@@ -13,7 +13,7 @@
 
                 <p>Password</p>
                 <input type="password" placeholder="Enter Password" name="_password">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/><br/>
                 <button type="submit" class="registerbtn">Login</button>
             </div>
 

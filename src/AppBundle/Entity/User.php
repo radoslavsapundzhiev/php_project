@@ -55,9 +55,35 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="author")
+     */
+    private $posts;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPosts(): ArrayCollection
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param Post $post
+     * @return User
+     */
+    public function addPosts(Post $post)
+    {
+        $this->posts[] = $post;
+        return $this;
+    }
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
 
@@ -209,6 +235,14 @@ class User implements UserInterface
     {
         $this->roles[] = $role;
         return $this;
+    }
+
+    /**
+     * @param Post $post
+     * @return bool
+     */
+    public function isAuthor(Post $post){
+        return $post->getAuthor()->getId() == $this->getId();
     }
 
     /**

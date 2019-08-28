@@ -30,11 +30,10 @@
             <nav>
                 <a class="active" href="{{ path('project_index') }}">HOME</a>
                 <a href="#">All Listings</a>
-                <a href="#">My Listings</a>
-                <a href="#">Create Listing</a>
                 <div id="profile">
-
                     {% if app.user %}
+                        <a href="#">My Posts</a>
+                        <a href="#">Create Post</a>
                         {#<a>Welcome {{ user.fullName }}</a>#}
                         <a href="{{ path('user_profile') }}">My Profile</a>
                         <a href="{{ path('security_logout') }}">LOGOUT</a>
@@ -42,7 +41,6 @@
                         <a href="{{ path('user_register') }}">REGISTER</a>
                         <a href="{{ path('security_login') }}">LOGIN</a>
                     {% endif %}
-
                 </div>
             </nav>
 
