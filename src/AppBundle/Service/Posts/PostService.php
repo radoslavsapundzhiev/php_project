@@ -10,38 +10,61 @@ namespace AppBundle\Service\Posts;
 
 
 use AppBundle\Entity\Post;
+use AppBundle\Repository\PostRepository;
+use AppBundle\Service\Users\UserServiceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class PostService implements PostServiceInterface
 {
     private $postRepository;
     private $userService;
+
+    /**
+     * PostService constructor.
+     * @param PostRepository $postRepository
+     * @param UserServiceInterface $userService
+     */
+    public function __construct(PostRepository $postRepository,
+                                UserServiceInterface $userService)
+    {
+        $this->postRepository = $postRepository;
+        $this->userService = $userService;
+    }
+
     /**
      * @return ArrayCollection | Post[]
      */
     public function getAll()
     {
-        // TODO: Implement getAll() method.
+        return $this->postRepository->findAll();
     }
 
     public function create(Post $post): bool
     {
-        // TODO: Implement create() method.
+        $author = $this->userService->currentUser();
+        $post->setAuthor($author);
+        $post->setViewCount(0);
+
+        return $this->postRepository->insert($post);
     }
 
     public function edit(Post $post): bool
     {
-        // TODO: Implement edit() method.
+        return $this->postRepository->update($post);
     }
 
     public function delete(Post $post): bool
     {
-        // TODO: Implement delete() method.
+        return $this->postRepository->remove($post);
     }
 
+    /**
+     * @param int $id
+     * @return Post|null|object
+     */
     public function getOne(int $id): ?Post
     {
-        // TODO: Implement getOne() method.
+        return $this->postRepository->find($id);
     }
 
     /**
@@ -49,6 +72,13 @@ class PostService implements PostServiceInterface
      */
     public function getAllPostsByAuthor()
     {
-        // TODO: Implement getAllPostsByAuthor() method.
+        return $this
+            ->postRepository
+            ->findBy(
+                [],
+                [
+                    'dateAdded' => 'DESC'
+                ]
+            );
     }
 }
