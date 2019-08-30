@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="listing-details">
+        <div class="my-listing-details">
+            <p id="auto-title">{{ post.title }}</p>
+            <img src="{{ post.image }}">
+            <div class="listing-props">
+                <h2>Brand: {{ post.brand }}</h2>
+                <h3>Model: {{ post.brand }}</h3>
+                <h3>Year: {{ post.year }}</h3>
+                <h3>Fuel: {{ post.fuel }}</h3>
+                <h3>Price: {{ post.price }}$</h3>
+                <h3>Views: {{ post.viewCount }}</h3>
+            </div>
+            <div class="listings-buttons">
+                {% if app.getUser() and (app.getUser().isAuthor(post) or app.getUser().isAdmin()) %}
+                <a href="{{ path('post_edit', {id: post.id}) }}" class="button-list">Edit</a>
+                <a href="{{ path('post_delete', {id: post.id}) }}" class="button-list">Delete</a>
+                {% endif %}
+                <a href="{{ path('post_all') }}" class="button-list">Back</a>
+
+            </div>
+            <p id="description-title">Description:</p>
+            <p id="description-para">{{ post.description }}</p>
+
+        </div>
+    </div>
+{% endblock %}
+

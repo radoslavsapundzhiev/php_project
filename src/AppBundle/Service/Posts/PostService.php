@@ -36,7 +36,15 @@ class PostService implements PostServiceInterface
      */
     public function getAll()
     {
-        return $this->postRepository->findAll();
+        return $this
+            ->postRepository
+            ->findBy(
+                [],
+                [
+                    'viewCount' => 'DESC',
+                    'dateAdded' => 'DESC'
+                ]
+            );
     }
 
     public function create(Post $post): bool
@@ -75,7 +83,9 @@ class PostService implements PostServiceInterface
         return $this
             ->postRepository
             ->findBy(
-                [],
+                [
+                    'author' => $this->userService->currentUser()
+                ],
                 [
                     'dateAdded' => 'DESC'
                 ]

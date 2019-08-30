@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div id="create-listing">
+        <form action="{{ path('post_delete', {id: post.id}) }}" method="post">
+            <div class="container">
+                <h1>Delete Car Post</h1>
+                <hr>
+
+                <p>Title</p>
+                <input type="text" placeholder="Enter Title" name="post[title]" value="{{ post.title }}" disabled>
+
+                <p>Description</p>
+                <input type="text" placeholder="Enter Description" name="post[description]" value="{{ post.description }}" disabled>
+
+                <p>Car Brand</p>
+                <input type="text" placeholder="Enter Car Brand" name="post[brand]" value="{{ post.brand }}" disabled>
+
+                <p>Car Model</p>
+                <input type="text" placeholder="Enter Car Model" name="post[model]" value="{{ post.model }}" disabled>
+
+                <p>Car Year</p>
+                <input type="number" placeholder="Enter Car Year" name="post[year]" value="{{ post.year }}" disabled>
+
+                <p>Car Image</p>
+                <input type="text" placeholder="Enter Car Image" name="post[image]" value="{{ post.image }}" disabled>
+
+                <p>Car Fuel Type</p>
+                <input type="text" placeholder="Enter Car Fuel Type" name="post[fuel]" value="{{ post.fuel }}" disabled>
+
+                <p>Car Price</p>
+                <input type="number" placeholder="Enter Car Price" name="post[price]" value="{{ post.price }}" disabled>
+
+                {{ form_row(form._token) }}
+
+                <hr>
+                <button type="submit" class="registerbtn">Delete Post</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

@@ -12,7 +12,7 @@
 .notification {
     font-size: 1.5em;
     color: #ffffff;
-    display: none;
+    display: block;
     text-align: right;
 }
 

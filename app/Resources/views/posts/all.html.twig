@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div id="car-listings">
+        <h1>Car Posts</h1>
+        <div id="listings">
+            {% for post in posts %}
+                <div class="listing">
+                    <p>{{ post.title }}</p>
+                    <img src="{{ post.image }}">
+                    <h2>Brand: {{ post.brand }}</h2>
+                    <div class="info">
+                        <div id="data-info">
+                            <h3>Seller: {{ post.author.fullName }}</h3>
+                            <h3>Fuel: {{ post.fuel }}</h3>
+                            <h3>Year: {{ post.year }}</h3>
+                            <h3>Price: {{ post.price }} $</h3>
+                            <h3>Views: {{ post.viewCount }}</h3>
+                        </div>
+                        <div id="data-buttons">
+                            <ul>
+                                {% if app.getUser() and (app.getUser().isAuthor(post) or app.getUser().isAdmin()) %}
+                                    <li class="action">
+                                        <a href="{{ path('post_edit', {id: post.id}) }}"
+                                           class="button-carDetails">edit</a>
+                                    </li>
+                                    <li class="action">
+                                        <a href="{{ path('post_delete', {id: post.id}) }}" class="button-carDetails">delete</a>
+                                    </li>
+                                {% endif %}
+                                <li class="action">
+                                    <a href="{{ path('post_view', {id: post.id}) }}" class="button-carDetails">Details</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% if posts is empty %}
+                <p class="no-cars">No cars in database.</p>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+

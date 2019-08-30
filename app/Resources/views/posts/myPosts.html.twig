@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <div id="notifications">
+        {% for msg in app.session.flashbag.get('info') %}
+            <div id="infoBox" class="notification">
+                <span>{{ msg }}</span>
+            </div>
+        {% endfor %}
+
+        {% for msg in app.session.flashbag.get('errors') %}
+            <div id="errorBox" class="notification">
+                <span>{{ msg }}</span>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="my-listings">
+        <h1>My car posts</h1>
+        <div class="car-listings">
+            {% for post in posts %}
+            <div class="my-listing">
+                <p id="listing-title">{{ post.title }}</p>
+                <img src="{{ post.image }}">
+
+                <div class="listing-props-myPosts">
+                    <h2>Brand: {{ post.brand }}</h2>
+                    <h3>Model: {{ post.model }}</h3>
+                    <h3>Year: {{ post.year }}</h3>
+                    <h3>Price: {{ post.price }}$</h3>
+                    <h3>Views: {{ post.viewCount }}</h3>
+                </div>
+                <div class="my-listing-buttons">
+                    <a href="{{ path('post_view', {id: post.id}) }}" class="my-button-list">Details</a>
+                    <a href="{{ path('post_edit', {id: post.id}) }}" class="my-button-list">Edit</a>
+                    <a href="{{ path('post_delete', {id: post.id}) }}" class="my-button-list">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if posts is empty %}
+            <p class="no-cars">No cars in database.</p>
+        {% endif %}
+
+    </div>
+{% endblock %}
+

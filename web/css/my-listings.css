@@ -33,6 +33,15 @@ h3 {
     padding: 0 10px 0 30px;
 }
 
+.listing-props-myPosts{
+    display: flex;
+}
+
+.listing-props-myPosts h3 {
+    padding: 0;
+    display: inline-block;
+}
+
 .my-listing-details>p#description-title {
     font-size: 39px;
     text-align: center;

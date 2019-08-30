@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>Car Zone</title>
+    <title>{% block title %}Car Zone{% endblock %}</title>
 
     {% block stylesheets %}
 
@@ -19,13 +19,11 @@
         <link rel="stylesheet" href="{{ asset('css/listing-details.css') }}">
 
     {% endblock %}
-
     <script>
         setTimeout(function () {
-            $('#info').fadeOut();
+            $('#notifications').fadeOut();
         }, 2000)
     </script>
-
 </head>
 
 <body>
@@ -35,13 +33,12 @@
 
             <nav>
                 <a class="active" href="{{ path('project_index') }}">HOME</a>
-                <a href="#">All Listings</a>
+                <a href="{{ path('post_all') }}">All Posts</a>
                 <div id="profile">
                     {% if app.user %}
-                        <a href="#">My Posts</a>
+                        <a href="{{ path('my_posts') }}">My Posts</a>
                         <a href="{{ path('post_create') }}">Create Post</a>
-                        {#<a>Welcome {{ user.fullName }}</a>#}
-                        <a href="{{ path('user_profile') }}">My Profile</a>
+                        <a href="{{ path('user_profile') }}">My profile</a>
                         <a href="{{ path('security_logout') }}">LOGOUT</a>
                     {% else %}
                         <a href="{{ path('user_register') }}">REGISTER</a>
@@ -72,6 +69,14 @@
     {% endblock %}
 
 </div>
+
+{% block javascripts %}
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+{% endblock %}
+
 </body>
 
 </html>
