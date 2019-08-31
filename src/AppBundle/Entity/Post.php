@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,7 +60,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="text")
+     * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
 
@@ -99,6 +100,31 @@ class Post
     private $author;
 
     /**
+     * @var ArrayCollection|Question[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="post")
+     */
+    private $questions;
+
+    /**
+     * @return Question[]|ArrayCollection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * @param Question[]|ArrayCollection $questions
+     * @return Post
+     */
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
+        return $this;
+    }
+
+    /**
      * @return User
      */
     public function getAuthor()
@@ -119,6 +145,7 @@ class Post
     public function __construct()
     {
         $this->dateAdded = new \DateTime('now');
+        $this->questions = new ArrayCollection();
     }
 
 
@@ -253,30 +280,6 @@ class Post
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Post
-     */
-    public function setImage(string $image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Set fuel
      *
      * @param string $fuel
@@ -365,6 +368,22 @@ class Post
     public function getViewCount()
     {
         return $this->viewCount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage(string $image)
+    {
+        $this->image = $image;
     }
 }
 

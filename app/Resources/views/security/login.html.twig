@@ -1,6 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    <div id="notifications">
+        {% for msg in app.session.flashbag.get('info') %}
+            <div id="infoBox" class="notification">
+                <span>{{ msg }}</span>
+            </div>
+        {% endfor %}
+
+        {% for msg in app.session.flashbag.get('errors') %}
+            <div id="errorBox" class="notification">
+                <span>{{ msg }}</span>
+            </div>
+        {% endfor %}
+
+    </div>
+
     <div id="login">
         <form name="authenticate" action="{{ path('security_login') }}" method="post">
             <div class="container">

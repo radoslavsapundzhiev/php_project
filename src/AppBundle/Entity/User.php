@@ -45,6 +45,13 @@ class User implements UserInterface
     private $fullName;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role")
@@ -61,6 +68,31 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="author")
      */
     private $posts;
+
+    /**
+     * @var ArrayCollection|Question[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="author")
+     */
+    private $questions;
+
+    /**
+     * @return Question[]|ArrayCollection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * @param Question[]|ArrayCollection $questions
+     * @return User
+     */
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
+        return $this;
+    }
 
     /**
      * @return ArrayCollection
@@ -84,6 +116,7 @@ class User implements UserInterface
     {
         $this->roles = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
 
@@ -250,6 +283,22 @@ class User implements UserInterface
      */
     public function isAdmin(){
         return in_array("ROLE_ADMIN", $this->getRoles());
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage(string $image)
+    {
+        $this->image = $image;
     }
 }
 

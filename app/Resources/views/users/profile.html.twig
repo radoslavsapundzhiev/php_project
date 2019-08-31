@@ -1,7 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <h1>Hello {{ user.email }}</h1>
+    <div class="profile">
 
-    <h3>FullName: {{ user.fullName }}</h3>
+        <h1>Hello {{ user.email }}</h1>
+
+        <h3>FullName: {{ user.fullName }}</h3>
+        <div>
+            <img src="{{ asset('uploads/images/users/' ~ user.image) }}" width="200px" height="150px">
+        </div>
+    </div>
+
+    <a href="{{ path('user_edit_profile') }}" class="button-list">Edit Profile</a>
+    <a href="{{ path('post_all') }}" class="button-list">Back</a>
+
 {% endblock %}

@@ -3,7 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +18,11 @@ class PostType extends AbstractType
             ->add('brand', TextType::class)
             ->add('model', TextType::class)
             ->add('year', TextType::class)
-            ->add('image', TextType::class)
+            ->add('image', FileType::class,
+                    [
+                        'data_class' => null
+                    ]
+                )
             ->add('fuel', TextType::class)
             ->add('price', TextType::class);
     }

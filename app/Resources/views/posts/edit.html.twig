@@ -2,7 +2,7 @@
 
 {% block main %}
     <div id="create-listing">
-        <form action="{{ path('post_edit', {id: post.id}) }}" method="post">
+        <form enctype="multipart/form-data" action="{{ path('post_edit', {id: post.id}) }}" method="post">
             <div class="container">
                 <h1>Edit Car Post</h1>
                 <p>Please fill in this form to create an listing.</p>
@@ -23,8 +23,8 @@
                 <p>Car Year</p>
                 <input type="number" placeholder="Enter Car Year" name="post[year]" value="{{ post.year }}">
 
-                <p>Car Image</p>
-                <input type="text" placeholder="Enter Car Image" name="post[image]" value="{{ post.image }}">
+                <p>Upload Car Image</p>
+                <input type="file" placeholder="Upload Car Image" name="post[image]" value="">
 
                 <p>Car Fuel Type</p>
                 <input type="text" placeholder="Enter Car Fuel Type" name="post[fuel]" value="{{ post.fuel }}">

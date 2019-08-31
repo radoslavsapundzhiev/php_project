@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div id="register">
+        <form enctype="multipart/form-data" action="{{ path('user_edit_profile') }}" method="post">
+            <div class="container">
+                <h2>Edit Profile</h2>
+                <p>Please fill in this form to edit your account.</p>
+                <hr>
+
+                <p>Email</p>
+                <input type="email" placeholder="Enter Email" name="user[email]" value="{{ user.email }}" required>
+
+                <p>Full Name</p>
+                <input type="text" placeholder="Enter Full Name" name="user[fullName]" value="{{ user.fullName }}" required>
+
+                <div id="pass">
+
+                </div>
+
+                <p>Upload Image</p>
+                <input accept=".jpg, .jpeg, .png" type="file" placeholder="Upload Image" name="user[image]">
+
+                <hr>
+
+                <div>
+
+                    <button style="background-color: red" id="changePass" class="button">Change Password</button>
+
+                </div>
+
+
+                <button type="submit" class="button-list">Edit</button>
+                <a href="{{ path('user_profile') }}" class="button-list">Back</a>
+                <hr>
+            </div>
+
+            {{ form_row(form._token) }}
+
+        </form>
+    </div>
+
+    <script>
+        $('#changePass').click(function () {
+            $('#pass').empty();
+            let form =
+                `
+                <p>Password</p>
+                <input type="password" placeholder="Enter Password" name="user[password][first]" required>
+
+                <p>Repeat Password</p>
+                <input type="password" placeholder="Repeat Password" name="user[password][second]" required>
+            `;
+
+            $('#pass').append(form);
+            $('#pass').toggle();
+        });
+    </script>
+{% endblock %}
+

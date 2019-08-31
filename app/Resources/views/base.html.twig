@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="{{ asset('css/listing-details.css') }}">
 
     {% endblock %}
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script>
         setTimeout(function () {
             $('#notifications').fadeOut();
@@ -38,7 +39,7 @@
                     {% if app.user %}
                         <a href="{{ path('my_posts') }}">My Posts</a>
                         <a href="{{ path('post_create') }}">Create Post</a>
-                        <a href="{{ path('user_profile') }}">My profile</a>
+                        <a href="{{ path('user_profile') }}"><img src="{{ asset('uploads/images/users/' ~ app.getUser().image) }}" width="15px" height="15px">  {{ app.user.fullName }}</a>
                         <a href="{{ path('security_logout') }}">LOGOUT</a>
                     {% else %}
                         <a href="{{ path('user_register') }}">REGISTER</a>

@@ -7,7 +7,7 @@
             {% for post in posts %}
                 <div class="listing">
                     <p>{{ post.title }}</p>
-                    <img src="{{ post.image }}">
+                    <img src="{{ asset('uploads/images/posts/' ~ post.image) }}">
                     <h2>Brand: {{ post.brand }}</h2>
                     <div class="info">
                         <div id="data-info">
@@ -19,6 +19,7 @@
                         </div>
                         <div id="data-buttons">
                             <ul>
+
                                 {% if app.getUser() and (app.getUser().isAuthor(post) or app.getUser().isAdmin()) %}
                                     <li class="action">
                                         <a href="{{ path('post_edit', {id: post.id}) }}"
@@ -27,9 +28,12 @@
                                     <li class="action">
                                         <a href="{{ path('post_delete', {id: post.id}) }}" class="button-carDetails">delete</a>
                                     </li>
+
                                 {% endif %}
+
                                 <li class="action">
-                                    <a href="{{ path('post_view', {id: post.id}) }}" class="button-carDetails">Details</a>
+                                    <a href="{{ path('post_view', {id: post.id}) }}"
+                                       class="button-carDetails">Details</a>
                                 </li>
 
                             </ul>

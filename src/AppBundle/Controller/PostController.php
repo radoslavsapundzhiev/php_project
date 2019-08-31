@@ -8,6 +8,8 @@ use AppBundle\Form\PostType;
 use AppBundle\Service\Posts\PostServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -46,6 +48,9 @@ class PostController extends Controller
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
+
+        $this->uploadFile($form, $post);
+
 
         $this->postService->create($post);
 
@@ -91,6 +96,8 @@ class PostController extends Controller
         $post = $this->postService->getOne($id);
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
+
+        $this->uploadFile($form, $post);
 
         $this->postService->edit($post);
 
@@ -209,5 +216,25 @@ class PostController extends Controller
                 ['post' => $post]
             );
 
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param Post $post
+     */
+    private function uploadFile(FormInterface $form, Post $post)
+    {
+        /** @var UploadedFile $file */
+        $file = $form['image']->getData();
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+        if ($file) {
+            $file->move(
+                $this->getParameter('posts_directory'),
+                $fileName
+            );
+
+            $post->setImage($fileName);
+        }
     }
 }

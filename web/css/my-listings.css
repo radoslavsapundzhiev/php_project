@@ -64,10 +64,12 @@ h3 {
 }
 
 .my-listings-buttons {
-    width: 30%;
+    width: 50%;
     margin: auto;
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 
 .my-listing-details {
@@ -86,7 +88,7 @@ h3 {
 }
 
 .my-listing-buttons {
-    width: 90%;
+    width: 100%;
     margin: auto;
     margin-top: 34px;
 }

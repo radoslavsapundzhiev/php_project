@@ -4,6 +4,21 @@
 
 {% block main %}
 
+    <div id="notifications">
+        {% for msg in app.session.flashbag.get('info') %}
+            <div id="infoBox" class="notification">
+                <span>{{ msg }}</span>
+            </div>
+        {% endfor %}
+
+        {% for msg in app.session.flashbag.get('errors') %}
+            <div id="errorBox" class="notification">
+                <span>{{ msg }}</span>
+            </div>
+        {% endfor %}
+
+    </div>
+
     <div id="register">
         <form action="{{ path('user_register') }}" method="post">
             <div class="container">
@@ -12,10 +27,10 @@
                 <hr>
 
                 <p>Email</p>
-                <input type="email" placeholder="Enter Email" name="user[email]" required>
+                <input type="email" placeholder="Enter Email" name="user[email]" value="{{ user.email|default(null) }}" required>
 
                 <p>Full Name</p>
-                <input type="text" placeholder="Enter Full Name" name="user[fullName]" required>
+                <input type="text" placeholder="Enter Full Name" name="user[fullName]" value="{{ user.fullName|default(null) }}" required>
 
                 <p>Password</p>
                 <input type="password" placeholder="Enter Password" name="user[password][first]" required>
