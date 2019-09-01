@@ -25,13 +25,28 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
-     * @param Question $comment
+     * @param Question $question
      * @return bool
      * @throws \Doctrine\ORM\ORMException
      */
-    public function insert(Question $comment){
+    public function insert(Question $question){
         try {
-            $this->_em->persist($comment);
+            $this->_em->persist($question);
+            $this->_em->flush();
+            return true;
+        } catch (OptimisticLockException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param Question $question
+     * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function remove(Question $question){
+        try {
+            $this->_em->remove($question);
             $this->_em->flush();
             return true;
         } catch (OptimisticLockException $e) {

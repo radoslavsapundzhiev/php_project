@@ -79,4 +79,20 @@ class QuestionController extends Controller
             ]
         );
     }
+
+    /**
+     * @Route("/question/{id}", name="question_view", methods={"GET"})
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function view($id){
+        $question = $this->questionService->getOne($id);
+        $post = $this->postService->getOne($question->getPost()->getId());
+        return $this->render("questions/view.html.twig",
+            [
+                'question' => $question,
+                'post' => $post
+            ]
+        );
+    }
 }

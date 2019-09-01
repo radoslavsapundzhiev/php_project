@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1>{{ question.content }}</h1>
+    <h2>{{ question.dateAdded|date("F jS \\a\\t g:ia") }}</h2>
+    <a href="{{ path('questions_view', {id: post.id}) }}" class="button-list">Back</a>
+{% endblock %}
+

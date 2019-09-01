@@ -68,8 +68,12 @@ class QuestionService implements QuestionServiceInterface
             ->findBy(['post' => $post], ['dateAdded' => 'DESC']);
     }
 
-    public function getOne(): ?Question
+    /**
+     * @param $id
+     * @return Question|null|object
+     */
+    public function getOne(int $id): ?Question
     {
-        // TODO: Implement getOne() method.
+        return $this->questionRepository->find($id);
     }
 }

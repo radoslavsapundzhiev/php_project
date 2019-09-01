@@ -18,7 +18,7 @@
                     <h5>Author: {{ question.author.fullName }}</h5>
                 </div>
                 <div class="my-listing-buttons">
-                    <a href="#" class="my-button-list">Edit</a>
+                    <a href="{{ path('question_view', {id: question.id}) }}" class="my-button-list">View</a>
                     <a href="#" class="my-button-list">Delete</a>
                     <a href="{{ path('post_view', {id: question.post.id}) }}" class="button-list">Back</a>
                 </div>

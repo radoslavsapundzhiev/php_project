@@ -20,5 +20,5 @@ interface QuestionServiceInterface
      * @return Question[]
      */
     public function getAllByPostId(int $postId);
-    public function getOne(): ?Question;
+    public function getOne(int $id): ?Question;
 }
