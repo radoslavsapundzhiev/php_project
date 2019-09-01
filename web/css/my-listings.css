@@ -42,6 +42,22 @@ h3 {
     display: inline-block;
 }
 
+.listing-props-questions{
+    text-align: center;
+}
+
+.listing-props-questions h3{
+    display: block;
+}
+
+.listing-props-questions h2{
+    padding-bottom: 35%;
+}
+
+#listing-title-questions{
+    padding-bottom: 20%;
+}
+
 .my-listing-details>p#description-title {
     font-size: 39px;
     text-align: center;

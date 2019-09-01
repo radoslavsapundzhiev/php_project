@@ -1,11 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    {% for question in questions %}
-        <p>{{ question.title }}</p>
-        <p>{{ question.content }}</p>
-        <p>{{ question.author.fullName }}</p>
-        <p>{{ question.dateAdded|date("F jS \\a\\t g:ia") }}</p>
-    {% endfor %}
+
+    <div class="my-listings">
+        <h1>Post questions</h1>
+        <div class="car-listings">
+            {% for question in questions %}
+            <div class="my-listing">
+                <h2 id="listing-title-questions">Title: {{ question.title }}</h2>
+
+                <div class="listing-props-questions">
+
+                    <h2>Content: {{ question.content }}</h2>
+
+                    <h5>Date added: {{ question.dateAdded|date("F jS \\a\\t g:ia") }}</h5>
+
+                    <h5>Author: {{ question.author.fullName }}</h5>
+                </div>
+                <div class="my-listing-buttons">
+                    <a href="#" class="my-button-list">Edit</a>
+                    <a href="#" class="my-button-list">Delete</a>
+                    <a href="{{ path('post_view', {id: question.post.id}) }}" class="button-list">Back</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if questions is empty %}
+            <p class="no-cars">No questions for this post in database.</p>
+        {% endif %}
+
+    </div>
 {% endblock %}
 
