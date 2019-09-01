@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div id="create-listing">
+        <form enctype="multipart/form-data" action="{{ path('question_delete', {id: question.id})}}" method="post">
+            <div class="container">
+                <h1>Delete question for this post</h1>
+                <p>Please fill in this form to create a question.</p>
+                <hr>
+
+                <p>Title</p>
+                <input type="text" placeholder="Enter Title" name="question[title]" value="{{ question.title }}" disabled>
+
+                <p>Content</p>
+                <textarea name="question[content]" placeholder="Enter Content" rows="12" disabled>{{ question.content }}</textarea>
+
+                {{ form_row(form._token) }}
+
+                <hr>
+                <button type="submit" class="registerbtn">Delete</button>
+            </div>
+        </form>
+        <a href="{{ path('question_view', {id: question.id}) }}" class="button-list">Back</a>
+    </div>
+{% endblock %}
+

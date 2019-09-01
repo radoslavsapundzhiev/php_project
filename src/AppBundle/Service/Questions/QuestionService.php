@@ -76,4 +76,14 @@ class QuestionService implements QuestionServiceInterface
     {
         return $this->questionRepository->find($id);
     }
+
+    /**
+     * @param Question $question
+     * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function delete(Question $question): bool
+    {
+        $this->questionRepository->remove($question);
+    }
 }

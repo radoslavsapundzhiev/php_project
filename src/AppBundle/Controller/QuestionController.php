@@ -82,6 +82,7 @@ class QuestionController extends Controller
 
     /**
      * @Route("/question/{id}", name="question_view", methods={"GET"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -94,5 +95,38 @@ class QuestionController extends Controller
                 'post' => $post
             ]
         );
+    }
+
+    /**
+     * @Route("/question/delete/{id}", name="question_delete", methods={"GET"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function delete(int $id){
+        $question = $this->questionService->getOne($id);
+        return $this->render("questions/delete.html.twig",
+            [
+                'form' => $this->createForm(QuestionType::class)->createView(),
+                'question' => $question
+            ]
+        );
+    }
+
+    /**
+     * @Route("/question/delete/{id}", methods={"POST"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteProcess(Request $request, $id){
+        $question = $this->questionService->getOne($id);
+        $form = $this->createForm(QuestionType::class, $question);
+        $form->handleRequest($request);
+
+        $this->questionService->delete($question);
+        $this->addFlash("info", "Deleted question successfully!");
+        return $this->redirectToRoute("questions_view");
     }
 }

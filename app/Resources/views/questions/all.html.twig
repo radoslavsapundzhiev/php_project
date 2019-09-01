@@ -2,6 +2,21 @@
 
 {% block main %}
 
+    <div id="notifications">
+        {% for msg in app.session.flashbag.get('info') %}
+            <div id="infoBox" class="notification">
+                <span>{{ msg }}</span>
+            </div>
+        {% endfor %}
+
+        {% for msg in app.session.flashbag.get('errors') %}
+            <div id="errorBox" class="notification">
+                <span>{{ msg }}</span>
+            </div>
+        {% endfor %}
+
+    </div>
+
     <div class="my-listings">
         <h1>Post questions</h1>
         <div class="car-listings">
@@ -10,16 +25,10 @@
                 <h2 id="listing-title-questions">Title: {{ question.title }}</h2>
 
                 <div class="listing-props-questions">
-
-                    <h2>Content: {{ question.content }}</h2>
-
                     <h5>Date added: {{ question.dateAdded|date("F jS \\a\\t g:ia") }}</h5>
-
-                    <h5>Author: {{ question.author.fullName }}</h5>
                 </div>
                 <div class="my-listing-buttons">
                     <a href="{{ path('question_view', {id: question.id}) }}" class="my-button-list">View</a>
-                    <a href="#" class="my-button-list">Delete</a>
                     <a href="{{ path('post_view', {id: question.post.id}) }}" class="button-list">Back</a>
                 </div>
             </div>

@@ -1,8 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <h1>{{ question.content }}</h1>
-    <h2>{{ question.dateAdded|date("F jS \\a\\t g:ia") }}</h2>
-    <a href="{{ path('questions_view', {id: post.id}) }}" class="button-list">Back</a>
+    <div class="listing-details">
+        <div class="my-listing-details">
+            <p id="auto-title">Title: {{ question.title }}</p>
+            <div class="listings-buttons">
+                <a href="{{ path('question_delete', {id: question.id}) }}" class="my-button-list">Delete</a>
+                <a href="{{ path('questions_view', {id: post.id}) }}" class="button-list">Back</a>
+            </div>
+            <p id="description-title">Description:</p>
+            <p id="description-para">{{ question.content }}</p>
+            <h2>Date added: {{ question.dateAdded|date("F jS \\a\\t g:ia") }}</h2>
+            <h2>Author: {{ question.author.fullName }}</h2>
+        </div>
+    </div>
 {% endblock %}
 
