@@ -120,13 +120,13 @@ class QuestionController extends Controller
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function deleteProcess(Request $request, $id){
+    public function deleteProcess(Request $request,int $id){
         $question = $this->questionService->getOne($id);
         $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
 
         $this->questionService->delete($question);
         $this->addFlash("info", "Deleted question successfully!");
-        return $this->redirectToRoute("questions_view");
+        return $this->redirectToRoute("post_all");
     }
 }

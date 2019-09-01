@@ -21,5 +21,5 @@ interface QuestionServiceInterface
      */
     public function getAllByPostId(int $postId);
     public function getOne(int $id): ?Question;
-    public function delete(Question $question):bool;
+    public function delete(Question $question);
 }
