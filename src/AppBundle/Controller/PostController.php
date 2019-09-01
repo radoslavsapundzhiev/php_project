@@ -184,6 +184,7 @@ class PostController extends Controller
 
     /**
      * @Route("/all", name="post_all")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function allPosts(){
@@ -197,6 +198,7 @@ class PostController extends Controller
 
     /**
      * @Route("/post/{id}", name="post_view")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
