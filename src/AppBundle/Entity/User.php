@@ -77,6 +77,31 @@ class User implements UserInterface
     private $questions;
 
     /**
+     * @var ArrayCollection | Message[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="author")
+     */
+    private $comments;
+
+    /**
+     * @return Message[]|ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Message $comments
+     * @return User
+     */
+    public function setComments(Message $comments)
+    {
+        $this->comments[] = $comments;
+        return $this;
+    }
+
+    /**
      * @return Question[]|ArrayCollection
      */
     public function getQuestions()
@@ -117,6 +142,7 @@ class User implements UserInterface
         $this->roles = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->questions = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
 

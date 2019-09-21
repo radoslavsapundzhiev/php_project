@@ -33,7 +33,7 @@
                 {% if app.getUser() and (app.getUser().isAuthor(post) or app.getUser().isAdmin()) %}
                     <a href="{{ path('post_edit', {id: post.id}) }}" class="button-list">Edit</a>
                     <a href="{{ path('post_delete', {id: post.id}) }}" class="button-list">Delete</a>
-                    <a href="{{ path('questions_view', {id: post.id})}}" class="button-list">Questions</a>
+                    <a href="{{ path('questions_view', {id: post.id}) }}" class="button-list">Questions</a>
                 {% else %}
                     <a href="{{ path('question_create', {id: post.id}) }}" class="button-list">Ask</a>
                 {% endif %}
@@ -42,9 +42,30 @@
             </div>
             <p id="description-title">Description:</p>
             <p id="description-para">{{ post.description }}</p>
-
+            <a id="add" class="button-list">Add Comment</a>
+            <div id="comment"></div>
 
         </div>
     </div>
+
+
+
+    <script>
+        $('#add').click(function () {
+            $('#comment').empty();
+            let commentForm =
+                `
+                <form method="post" action="{{ path('message_create', {id: post.id}) }}">
+                    <div class="container">
+                        <textarea name="message[content]" placeholder="Enter Content" rows="12"></textarea>
+                    </div>
+                    <hr>
+                    <input type="submit" class="registerbtn" value="Submit"/>
+                 </form>
+                 `;
+            $('#comment').append(commentForm);
+            $('#comment').toggle();
+        })
+    </script>
 {% endblock %}
 

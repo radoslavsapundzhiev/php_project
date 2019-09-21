@@ -72,10 +72,12 @@ class QuestionController extends Controller
      */
     public function getAllByPost($id){
         $questions = $this->questionService->getAllByPostId($id);
+        $post = $this->postService->getOne($id);
 
         return $this->render("questions/all.html.twig",
             [
-                'questions' => $questions
+                'questions' => $questions,
+                'post' => $post
             ]
         );
     }

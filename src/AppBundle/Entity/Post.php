@@ -107,6 +107,13 @@ class Post
     private $questions;
 
     /**
+     * @var ArrayCollection | Message[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="post")
+     */
+    private $comments;
+
+    /**
      * @return Question[]|ArrayCollection
      */
     public function getQuestions()
@@ -146,6 +153,7 @@ class Post
     {
         $this->dateAdded = new \DateTime('now');
         $this->questions = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
 
@@ -384,6 +392,22 @@ class Post
     public function setImage(string $image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return Message[]|ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Message[]|ArrayCollection $comments
+     */
+    public function setComments($comments): void
+    {
+        $this->comments = $comments;
     }
 }
 
