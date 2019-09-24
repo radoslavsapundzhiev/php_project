@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Message;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\User;
 use AppBundle\Form\PostType;
@@ -214,8 +215,16 @@ class PostController extends Controller
         $em->persist($post);
         $em->flush();
 
+        $comments = $this
+            ->getDoctrine()
+            ->getRepository(Message::class)
+            ->findBy(['post' => $post], ['dateAdded' => 'DESC']);
+
         return $this->render('posts/view.html.twig',
-                ['post' => $post]
+                [
+                    'post' => $post,
+                    'comments' => $comments
+                ]
             );
 
     }

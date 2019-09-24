@@ -395,7 +395,7 @@ class Post
     }
 
     /**
-     * @return Message[]|ArrayCollection
+     * @return ArrayCollection | Message[]
      */
     public function getComments()
     {
@@ -404,10 +404,12 @@ class Post
 
     /**
      * @param Message[]|ArrayCollection $comments
+     * @return Post
      */
-    public function setComments($comments): void
+    public function setComments($comments)
     {
         $this->comments = $comments;
+        return $this;
     }
 }
 

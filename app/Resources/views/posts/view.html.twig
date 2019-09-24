@@ -45,6 +45,15 @@
             <a id="add" class="button-list">Add Comment</a>
             <div id="comment"></div>
 
+            <hr/>
+
+            {% for comment in comments %}
+                <p>{{ comment.content }}</p>
+                <p>{{ comment.author.fullName }}: <a href="{{ path('user_profile', {id: comment.author.id}) }}"><img src="{{ asset('uploads/images/users/' ~ comment.author.image) }}" width="15px" height="15px"></a></p>
+                <small>{{ comment.dateAdded|date("F jS \\a\\t g:ia") }}</small>
+                <hr/>
+            {% endfor %}
+
         </div>
     </div>
 
